@@ -1,0 +1,130 @@
+{
+  "configurations": {
+    "test-juejin-TestJueJinProcess": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinProcess"]
+      }
+    },
+    "test-juejin-TestJueJinGetName": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinGetName"]
+      }
+    },
+    "test-juejin-TestJueJinCheckSign": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinCheckSign"]
+      }
+    },
+    "test-juejin-TestJueJinCheckFreeLuckyDraw": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinCheckFreeLuckyDraw"]
+      }
+    },
+    "test-juejin-TestJueJinGetPoint": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinGetPoint"]
+      }
+    },
+    "test-juejin-TestJueJinSignDay": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinSignDay"]
+      }
+    },
+    "test-juejin-TestJueJinSign": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinSign"]
+      }
+    },
+    "test-juejin-TestLuckyDraw": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestLuckyDraw"]
+      }
+    },
+    "test-push-TestServerjPush": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/pkg/push/",
+        "mode": "test",
+        "args": ["-test.run", "TestServerjPush"]
+      }
+    }
+  }
+}
