@@ -1,5 +1,61 @@
 {
   "configurations": {
+    "run": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/cmd/main.go",
+        "mode": "debug",
+        "args": []
+      }
+    },
+    "test-recyle-TestEveryDayRang": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/pkg/recyle/",
+        "mode": "test",
+        "args": ["-test.run", "TestEveryDayRang"]
+      }
+    },
+    "test-config-TestYamlParse": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/pkg/config/",
+        "mode": "test",
+        "args": ["-test.run", "TestYamlParse"]
+      }
+    },
+    "test-juejin-TestJueJinSignPush": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinSignPush"]
+      }
+    },
     "test-juejin-TestJueJinProcess": {
       "adapter": "delve",
       "console": "integratedTerminal",

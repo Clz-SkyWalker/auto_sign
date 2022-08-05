@@ -8,6 +8,8 @@ import (
 	"strconv"
 	"strings"
 
+	"auto_sign/pkg/config"
+	"auto_sign/pkg/push"
 	"auto_sign/pkg/utils"
 )
 
@@ -62,7 +64,20 @@ func (item *signItem) getHeader(url string) http.Header {
 	}
 }
 
-func (j *JueJinSign) Process() {
+func (j *JueJinSign) Start() {
+	j.process()
+	j.push()
+}
+
+func (j *JueJinSign) push() {
+	push.NewPushServerj(push.PushServerJParam{
+		Key:   config.YamlConfigGlobal.Serverj,
+		Title: "[掘金]",
+		Desp:  j.ResultInfo,
+	})
+}
+
+func (j *JueJinSign) process() {
 	builder := strings.Builder{}
 	builder.WriteString("[掘金签到开始]\n")
 	for _, item := range j.signList {
