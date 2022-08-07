@@ -10,11 +10,20 @@ import (
 )
 
 func parseConfig() (*config.YamlConfig, error) {
-	config, err := config.NewYamlConfig("../../config/config.yaml")
+	yamlConfig, err := config.NewYamlConfig("../../config/config.yaml")
+	config.YamlConfigGlobal = yamlConfig
 	if err != nil {
 		return nil, err
 	}
-	return config, err
+	return yamlConfig, err
+}
+
+func TestJueJinStart(t *testing.T) {
+	config, err := parseConfig()
+	assert.IsEqual(err, nil)
+	result := NewJueJinSign(config.Juejin)
+	result.Start()
+	assert.IsEqual(result.request.Err, nil)
 }
 
 func TestJueJinSignPush(t *testing.T) {

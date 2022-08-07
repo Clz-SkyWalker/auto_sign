@@ -70,11 +70,12 @@ func (j *JueJinSign) Start() {
 }
 
 func (j *JueJinSign) push() {
-	push.NewPushServerj(push.PushServerJParam{
+  serverj:=push.NewPushServerj(push.PushServerJParam{
 		Key:   config.YamlConfigGlobal.Serverj,
 		Title: "[掘金]",
 		Desp:  j.ResultInfo,
 	})
+  serverj.Push()
 }
 
 func (j *JueJinSign) process() {

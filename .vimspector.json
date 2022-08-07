@@ -42,6 +42,20 @@
         "args": ["-test.run", "TestYamlParse"]
       }
     },
+    "test-juejin-TestJueJinStart": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestJueJinStart"]
+      }
+    },
     "test-juejin-TestJueJinSignPush": {
       "adapter": "delve",
       "console": "integratedTerminal",

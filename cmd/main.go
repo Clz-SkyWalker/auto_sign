@@ -14,8 +14,10 @@ func main() {
 		CookieList: config.YamlConfigGlobal.Juejin,
 	})
 	if err != nil {
+		fmt.Println("[启动失败]")
 		fmt.Println("错误：", err)
 		return
 	}
+	fmt.Println("[启动成功]")
 	con.Start()
 }
