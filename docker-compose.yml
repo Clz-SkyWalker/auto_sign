@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  skywalker:
+    build: 
+      context: .
+    container_name: skywalker #指定容器名
+    ports: 
+      - 7001:7001
+    environment:
+      TZ: Asia/Shanghai    #指定容器运行所属时区
+    volumes:
+      - /data/auto_sign:/app/config    

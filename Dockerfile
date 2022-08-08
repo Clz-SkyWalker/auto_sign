@@ -1,10 +1,10 @@
-FROM golang:1.18
+FROM alpine:latest
 
-MAINTAINER auto_sign
-RUN mkdir -p /data/auto_sign
-WORKDIR /data/auto_sign
+RUN mkdir -p /app
+RUN mkdir -p /app/config
+WORKDIR /app
 
-EXPOSE 9000
-CMD ["./bin/auto_sign"]
+ADD ./bin/auto_sign /app
 
+CMD ["./auto_sign"]
 

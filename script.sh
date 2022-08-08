@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 #获取输入的第一个参数
 cmd=$1
 
@@ -45,7 +46,7 @@ fi
 
 if [ $cmd == "build" ]
 then
-  go build -o ./bin/auto_sign ./cmd/main.go
+  CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./bin/auto_sign ./cmd/main.go
   echo "build success"
 fi
 
