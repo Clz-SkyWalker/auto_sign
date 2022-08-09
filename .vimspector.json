@@ -168,7 +168,7 @@
         "args": ["-test.run", "TestJueJinSign"]
       }
     },
-    "test-juejin-TestLuckyDraw": {
+    "test-juejin-TestJuejinLuckyDraw": {
       "adapter": "delve",
       "console": "integratedTerminal",
       "filetypes": ["go"],
@@ -179,7 +179,21 @@
         "request": "launch",
         "program": "${workspaceRoot}/src/service/",
         "mode": "test",
-        "args": ["-test.run", "TestLuckyDraw"]
+        "args": ["-test.run", "TestJuejinLuckyDraw"]
+      }
+    },
+    "test-ireader-TestIReaderGetSeed": {
+      "adapter": "delve",
+      "console": "integratedTerminal",
+      "filetypes": ["go"],
+      "variables": {
+        "dlvFlags": "--check-go-version=false --allow-non-terminal-interactive=false --wd=./ --log"
+      },
+      "configuration": {
+        "request": "launch",
+        "program": "${workspaceRoot}/src/service/",
+        "mode": "test",
+        "args": ["-test.run", "TestIReaderGetSeed"]
       }
     },
     "test-push-TestServerjPush": {

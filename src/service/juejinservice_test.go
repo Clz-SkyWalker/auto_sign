@@ -1,7 +1,6 @@
 package service
 
 import (
-	"auto_sign/pkg/config"
 	"auto_sign/pkg/push"
 	"fmt"
 	"testing"
@@ -9,17 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func parseConfig() (*config.YamlConfig, error) {
-	yamlConfig, err := config.NewYamlConfig("../../config/config.yaml")
-	config.YamlConfigGlobal = yamlConfig
-	if err != nil {
-		return nil, err
-	}
-	return yamlConfig, err
-}
-
 func TestJueJinStart(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	result.Start()
@@ -27,7 +17,7 @@ func TestJueJinStart(t *testing.T) {
 }
 
 func TestJueJinSignPush(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	result.process()
@@ -37,16 +27,16 @@ func TestJueJinSignPush(t *testing.T) {
 }
 
 func TestJueJinProcess(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	result.process()
-	assert.NotEqual(t, result.ResultInfo, "")
+	assert.NotEqual(t, result.ResultInfo, "", "获取信息为空")
 }
 
 // 测试获取名字
 func TestJueJinGetName(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
@@ -57,12 +47,12 @@ func TestJueJinGetName(t *testing.T) {
 
 // 测试检测签到状态
 func TestJueJinCheckSign(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.checkSignStatus(item)
-		if result.request.Err != nil {
+		if result.request.Err.Code != 0 {
 			fmt.Println(result.request.Err)
 			return
 		}
@@ -71,12 +61,12 @@ func TestJueJinCheckSign(t *testing.T) {
 
 // 检测免费抽奖次数
 func TestJueJinCheckFreeLuckyDraw(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.checkLuckyDraw(item)
-		if result.request.Err != nil {
+		if result.request.Err.Code != 0 {
 			fmt.Println(result.request.Err)
 			return
 		}
@@ -85,12 +75,12 @@ func TestJueJinCheckFreeLuckyDraw(t *testing.T) {
 
 // 获取矿石总数
 func TestJueJinGetPoint(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.getTotalPoint(item)
-		if result.request.Err != nil {
+		if result.request.Err.Code != 0 {
 			fmt.Println(result.request.Err)
 			return
 		}
@@ -99,12 +89,12 @@ func TestJueJinGetPoint(t *testing.T) {
 
 // 获取签到天数
 func TestJueJinSignDay(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.getTotalSignDay(item)
-		if result.request.Err != nil {
+		if result.request.Err.Code != 0 {
 			fmt.Println(result.request.Err)
 			return
 		}
@@ -113,12 +103,12 @@ func TestJueJinSignDay(t *testing.T) {
 
 // 签到
 func TestJueJinSign(t *testing.T) {
-	config, err := parseConfig()
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.sign(item)
-		if result.request.Err != nil {
+		if result.request.Err.Code != 0 {
 			fmt.Println(result.request.Err)
 			return
 		}
@@ -126,13 +116,13 @@ func TestJueJinSign(t *testing.T) {
 }
 
 // 测试抽奖
-func TestLuckyDraw(t *testing.T) {
-	config, err := parseConfig()
+func TestJuejinLuckyDraw(t *testing.T) {
+	config, err := testInit()
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.luckyDraw(item)
-		if result.request.Err != nil {
+		if result.request.Err.Code != 0 {
 			fmt.Println(result.request.Err)
 			return
 		}

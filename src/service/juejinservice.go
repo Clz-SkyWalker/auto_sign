@@ -70,12 +70,12 @@ func (j *JueJinSign) Start() {
 }
 
 func (j *JueJinSign) push() {
-  serverj:=push.NewPushServerj(push.PushServerJParam{
+	serverj := push.NewPushServerj(push.PushServerJParam{
 		Key:   config.YamlConfigGlobal.Serverj,
 		Title: "[掘金]",
 		Desp:  j.ResultInfo,
 	})
-  serverj.Push()
+	serverj.Push()
 }
 
 func (j *JueJinSign) process() {
@@ -142,7 +142,7 @@ func (j *JueJinSign) getName(item *signItem) {
 
 	j.request = *utils.NewUtilsRequest(param)
 	j.request.Get()
-	if j.request.Err != nil {
+	if j.request.Err.Code != 0 {
 		item.err = j.request.Err
 		return
 	}
@@ -178,7 +178,7 @@ func (j *JueJinSign) checkSignStatus(item *signItem) {
 
 	j.request = *utils.NewUtilsRequest(param)
 	j.request.Get()
-	if j.request.Err != nil {
+	if j.request.Err.Code != 0 {
 		item.err = j.request.Err
 		return
 	}
@@ -209,7 +209,7 @@ func (j *JueJinSign) sign(item *signItem) {
 
 	j.request = *utils.NewUtilsRequest(param)
 	j.request.Post()
-	if j.request.Err != nil {
+	if j.request.Err.Code != 0 {
 		item.err = j.request.Err
 		return
 	}
@@ -250,7 +250,7 @@ func (j *JueJinSign) checkLuckyDraw(item *signItem) {
 
 	j.request = *utils.NewUtilsRequest(param)
 	j.request.Get()
-	if j.request.Err != nil {
+	if j.request.Err.Code != 0 {
 		item.err = j.request.Err
 		return
 	}
@@ -297,7 +297,7 @@ func (j *JueJinSign) luckyDraw(item *signItem) {
 
 	j.request = *utils.NewUtilsRequest(param)
 	j.request.Post()
-	if j.request.Err != nil {
+	if j.request.Err.Code != 0 {
 		item.err = j.request.Err
 		return
 	}
@@ -333,7 +333,7 @@ func (j *JueJinSign) getTotalPoint(item *signItem) {
 
 	j.request = *utils.NewUtilsRequest(param)
 	j.request.Get()
-	if j.request.Err != nil {
+	if j.request.Err.Code != 0 {
 		item.err = j.request.Err
 		return
 	}
@@ -364,7 +364,7 @@ func (j *JueJinSign) getTotalSignDay(item *signItem) {
 
 	j.request = *utils.NewUtilsRequest(param)
 	j.request.Get()
-	if j.request.Err != nil {
+	if j.request.Err.Code != 0 {
 		item.err = j.request.Err
 		return
 	}
