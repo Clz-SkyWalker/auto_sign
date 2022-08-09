@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-playground/assert/v2"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestEveryDayRang(t *testing.T) {
@@ -19,5 +19,5 @@ func TestEveryDayRang(t *testing.T) {
 	})
 	recyle.CreateRecyle()
 	time.Sleep(1 * time.Second)
-	assert.NotEqual(t, recyle.duration, nil)
+	assert.NotEqual(t, recyle.duration, nil, "循环周期为nil")
 }

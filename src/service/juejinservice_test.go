@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/go-playground/assert/v2"
+	"github.com/stretchr/testify/assert"
 )
 
 func parseConfig() (*config.YamlConfig, error) {
@@ -20,15 +20,15 @@ func parseConfig() (*config.YamlConfig, error) {
 
 func TestJueJinStart(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	result.Start()
-	assert.IsEqual(result.request.Err, nil)
+	assert.Equal(t, result.request.Err, nil, "请求错误")
 }
 
 func TestJueJinSignPush(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	result.process()
 	serverj := push.NewPushServerj(push.PushServerJParam{Key: config.Serverj,
@@ -38,7 +38,7 @@ func TestJueJinSignPush(t *testing.T) {
 
 func TestJueJinProcess(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	result.process()
 	assert.NotEqual(t, result.ResultInfo, "")
@@ -47,18 +47,18 @@ func TestJueJinProcess(t *testing.T) {
 // 测试获取名字
 func TestJueJinGetName(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.getName(item)
-		assert.IsEqual(item.err, nil)
+		assert.Equal(t, item.err, nil, "获取名字错误")
 	}
 }
 
 // 测试检测签到状态
 func TestJueJinCheckSign(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.checkSignStatus(item)
@@ -72,7 +72,7 @@ func TestJueJinCheckSign(t *testing.T) {
 // 检测免费抽奖次数
 func TestJueJinCheckFreeLuckyDraw(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.checkLuckyDraw(item)
@@ -86,7 +86,7 @@ func TestJueJinCheckFreeLuckyDraw(t *testing.T) {
 // 获取矿石总数
 func TestJueJinGetPoint(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.getTotalPoint(item)
@@ -100,7 +100,7 @@ func TestJueJinGetPoint(t *testing.T) {
 // 获取签到天数
 func TestJueJinSignDay(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.getTotalSignDay(item)
@@ -114,7 +114,7 @@ func TestJueJinSignDay(t *testing.T) {
 // 签到
 func TestJueJinSign(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.sign(item)
@@ -128,7 +128,7 @@ func TestJueJinSign(t *testing.T) {
 // 测试抽奖
 func TestLuckyDraw(t *testing.T) {
 	config, err := parseConfig()
-	assert.IsEqual(err, nil)
+	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	for _, item := range result.signList {
 		result.luckyDraw(item)

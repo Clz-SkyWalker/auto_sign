@@ -2,6 +2,7 @@ version: '3.5'
 
 services:
   skywalker:
+    tty: true
     build: 
       context: .
     container_name: skywalker #指定容器名
