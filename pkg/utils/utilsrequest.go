@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"time"
 
+	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
 
@@ -43,7 +44,7 @@ func (r *UtilsRequest) Get() {
 	uri, err := url.Parse(r.Url)
 	if err != nil {
 		r.Err = ErrReqParse.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "url", String: r.Url})
+		AddLogger(r.Err, zap.String("url", r.Url))
 		return
 	}
 	if len(r.Params) > 0 {
@@ -57,17 +58,19 @@ func (r *UtilsRequest) Get() {
 	r.Request, err = http.NewRequest(http.MethodGet, uri.String(), nil)
 	if err != nil {
 		r.Err = ErrReqNew.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "uri", String: uri.String()})
+		AddLogger(r.Err, zap.String("uri", uri.String()))
 		return
 	}
 
 	r.Request.Header = r.Header
 	r.client.Timeout = time.Duration(time.Second * 10)
 	r.Respose, err = r.client.Do(r.Request)
-	defer r.client.CloseIdleConnections()
+	defer func() {
+		r.client.CloseIdleConnections()
+	}()
 	if err != nil {
 		r.Err = ErrHttpGet.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "url", String: r.Url})
+		AddLogger(r.Err, zap.String("url", r.Url))
 	}
 }
 
@@ -75,7 +78,7 @@ func (r *UtilsRequest) Post() {
 	uri, err := url.Parse(r.Url)
 	if err != nil {
 		r.Err = ErrReqParse.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "url", String: r.Url})
+		AddLogger(r.Err, zap.String("url", r.Url))
 		return
 	}
 	if len(r.Params) > 0 {
@@ -90,23 +93,25 @@ func (r *UtilsRequest) Post() {
 	byteList, err = json.Marshal(r.Body)
 	if err != nil {
 		r.Err = ErrJsonMarshal.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "body", Interface: r.Body})
+		AddLogger(r.Err, zap.Field{Key: "body", Interface: r.Body, Type: zapcore.ObjectMarshalerType})
 		return
 	}
 	r.Request, err = http.NewRequest(http.MethodPost, uri.String(), bytes.NewReader(byteList))
 	if err != nil {
 		r.Err = ErrReqNew.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "uri", String: uri.String()})
+		AddLogger(r.Err, zap.String("uri", uri.String()))
 		return
 	}
 
 	r.Request.Header = r.Header
 	r.client.Timeout = time.Duration(time.Second * 10)
 	r.Respose, err = r.client.Do(r.Request)
-	defer r.client.CloseIdleConnections()
+	defer func() {
+		r.client.CloseIdleConnections()
+	}()
 	if err != nil {
 		r.Err = ErrHttpPost.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "url", String: r.Url})
+		AddLogger(r.Err, zap.String("url", r.Url))
 	}
 }
 
@@ -158,7 +163,7 @@ func (r *UtilsRequest) GetHttps() {
 	defer client.CloseIdleConnections()
 	if err != nil {
 		r.Err = ErrHttpPost.WithErr(err)
-		AddLogger(r.Err, zapcore.Field{Key: "url", String: r.Url})
+		AddLogger(r.Err, zap.String("url", r.Url))
 		return
 	}
 	// 延时关闭

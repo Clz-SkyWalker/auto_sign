@@ -13,7 +13,7 @@ func TestJueJinStart(t *testing.T) {
 	assert.Equal(t, err, nil, "配置错误")
 	result := NewJueJinSign(config.Juejin)
 	result.Start()
-	assert.Equal(t, result.request.Err, nil, "请求错误")
+	assert.Equal(t, result.request.Err.Code, 0, "请求错误")
 }
 
 func TestJueJinSignPush(t *testing.T) {
