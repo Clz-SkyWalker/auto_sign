@@ -10,7 +10,7 @@ import (
 
 func NewSignContainer(param SignContainerParam) (*SignContainer, error) {
 	recyleList := make([]*recyle.Recyle, 0)
-	if len(param.CookieList) == 0 {
+	if len(param.CookieList) != 0 {
 		juejin := service.NewJueJinSign(param.CookieList)
 		if param.RParam.RType == recyle.RecyleType(0) {
 			param.RParam = recyle.RecyleParam{

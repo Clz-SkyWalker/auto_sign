@@ -24,8 +24,9 @@ func (e Errno) WithErr(err error) Errno {
 }
 
 var (
-	InfoSystemStart     = Errno{1001, "[开始启动]", nil, zapcore.InfoLevel}
-	InfoSystemStartFail = Errno{1002, "[启动失败]", nil, zapcore.InfoLevel}
+	InfoSystemStart        = Errno{1001, "[开始启动]", nil, zapcore.InfoLevel}
+	InfoSystemStartFail    = Errno{1002, "[启动失败]", nil, zapcore.InfoLevel}
+	InfoSystemStartSuccess = Errno{1003, "[启动成功]", nil, zapcore.InfoLevel}
 
 	ErrReadFile      = Errno{10001, "读取文件错误", nil, zapcore.ErrorLevel}
 	ErrYamlUnmarshal = Errno{10021, "解析yaml失败", nil, zapcore.ErrorLevel}

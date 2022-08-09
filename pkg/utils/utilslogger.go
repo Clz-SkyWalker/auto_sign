@@ -1,6 +1,9 @@
 package utils
 
 import (
+	"os"
+	"time"
+
 	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -23,14 +26,28 @@ func AddLogger(l Errno, fields ...zap.Field) {
 
 func InitLogger() {
 	writeSyncer := getLogWriter()
+	consoleSyncer := zapcore.AddSync(os.Stdout)
 	encoder := getEncoder()
-	core := zapcore.NewCore(encoder, writeSyncer, zapcore.DebugLevel)
+	core := zapcore.NewTee(
+		zapcore.NewCore(encoder, writeSyncer, zapcore.DebugLevel),
+		zapcore.NewCore(encoder, consoleSyncer, zapcore.DebugLevel),
+	)
 	logger := zap.New(core, zap.AddCallerSkip(3))
 	sugarLogger = logger.Sugar()
 }
 
 func DeferSync() {
 	sugarLogger.Sync()
+}
+
+func tickerSync() {
+	tick := time.Tick(time.Minute)
+	for {
+		select {
+		case <-tick:
+			sugarLogger.Sync()
+		}
+	}
 }
 
 func getEncoder() zapcore.Encoder {

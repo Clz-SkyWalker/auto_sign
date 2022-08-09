@@ -22,10 +22,12 @@ func main() {
 		CookieList: config.YamlConfigGlobal.Juejin,
 	})
 	if err != nil {
+		utils.AddLogger(utils.InfoSystemStartFail)
 		fmt.Println("[启动失败]")
 		fmt.Println("错误：", err)
 		return
 	}
 	fmt.Println("[启动成功]")
+	utils.AddLogger(utils.InfoSystemStartSuccess)
 	con.Start()
 }
