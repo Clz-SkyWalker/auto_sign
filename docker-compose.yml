@@ -9,7 +9,8 @@ services:
     ports: 
       - 7001:7001
     environment:
-      TZ: Asia/Shanghai    #指定容器运行所属时区
+      - SET_CONTAINER_TIMEZONE=true #指定容器运行所属时区
+      - CONTAINER_TIMEZONE=Asia/Shanghai
     volumes:
       - /data/auto_sign/config:/app/config    
       - /data/auto_sign/logs:/app/logs
